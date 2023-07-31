@@ -5,7 +5,6 @@
   margin-left: 10%;
 }
 
-/* The CONTACT should be less bold to match the 'logo' but I'm following the exercise instructions */
 .contact {
   margin: 0;
   font-family: "Montserrat", sans-serif;
@@ -14,7 +13,6 @@
   padding-top: 90px;
 }
 
-/* Please note that I am including the VIDEO GAMES text in the logo because I don't have the actual logo so I took a screenshot */
 .logo {
   align-self: flex-start;
   height: 80px;
