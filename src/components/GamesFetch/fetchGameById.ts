@@ -7,7 +7,6 @@ export async function fetchGameById(
   const games: GameInfo[] = [];
   const promises = gamesRes.map(async (game, index) => {
     try {
-      // TODO: Secure key
       const res = await fetch(
         `https://api.rawg.io/api/games/${game.id}?key=${process.env.REACT_APP_API_KEY}
         `,

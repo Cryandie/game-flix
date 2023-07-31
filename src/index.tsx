@@ -14,7 +14,6 @@ root.render(
       <Header />
     </header>
     <main className="main-container">
-      {/* //TODO: We will have 2 components here, the filter and the list */}
       <section className="games-filter">
         <GamesFilter />
       </section>

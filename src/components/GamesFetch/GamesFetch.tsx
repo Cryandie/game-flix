@@ -4,8 +4,6 @@ import { GameInfo, GameResponse } from "./gamesTypes";
 import { fetchGameById } from "./fetchGameById";
 
 function GamesFetch() {
-  // TODO: Move private data to env
-  //TODO: Clean the data result and keep only what is needed before storing it in the games array.
   const url = `https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}`;
   const options = {
     method: "GET",
@@ -21,7 +19,6 @@ function GamesFetch() {
       const result: GameResponse[] = data.results;
       const gameInfo: GameInfo[] = await fetchGameById(result);
       setGames(gameInfo);
-      //   console.log(games);
     } catch (err: any) {
       //TODO: Handle errors
       setError(err.message);
@@ -46,7 +43,6 @@ function GamesFetch() {
     <div>
       {/* TODO:handle err style */}
       {error && <p>{error}</p>}
-      {/* TODO:Give Game a type */}
       {games.map((game: GameInfo) => (
         <div className="games-list-card" key={game.id}>
           {!isMobile && (
