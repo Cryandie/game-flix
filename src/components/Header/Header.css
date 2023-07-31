@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
+
+.header-container {
+  display: flex;
+  margin-left: 10%;
+}
+
+/* The CONTACT should be less bold to match the 'logo' but I'm following the exercise instructions */
+.contact {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 35px;
+  padding-left: 5%;
+  padding-top: 90px;
+}
+
+/* Please note that I am including the VIDEO GAMES text in the logo because I don't have the actual logo so I took a screenshot */
+.logo {
+  align-self: flex-start;
+  height: 80px;
+  padding-top: 60px;
+}
+
+/* media queries to handle different screen sizes  */
+@media (width < 750px) {
+  .header-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .contact {
+    align-self: baseline;
+    padding-top: 20px;
+    padding-left: 45px;
+  }
+  .logo {
+    align-self: baseline;
+  }
+}
+
+@media (width < 340px) {
+  .logo {
+    width: 250px;
+  }
+  .contact {
+    padding-left: 36px;
+  }
+}

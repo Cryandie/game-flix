@@ -1,0 +1,59 @@
+.card-item,
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.card-input,
+.order-dropdown {
+  background-color: #182c47;
+  margin-top: 5px;
+}
+
+.card-input {
+  height: 30px;
+}
+
+/* //TODO: This may change after replacing the input with a dropdown */
+.card-input::placeholder,
+.order-dropdown::placeholder {
+  color: #fff;
+}
+
+.order-content {
+  display: flex;
+}
+
+.filter-button-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.filter-button {
+  background-color: #5692e8;
+  width: 60px;
+  height: 25px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.filter-button,
+.card-input {
+  border: none;
+}
+
+/* Browser compatibility: */
+
+.card-input::-webkit-input-placeholder {
+  /* Chrome, Edge, Safari */
+  color: #fff;
+}
+.card-input::-moz-placeholder {
+  /* Firefox */
+  color: #fff;
+}
+.card-input::-ms-input-placeholder {
+  /* Internet Explorer */
+  color: #fff;
+}
