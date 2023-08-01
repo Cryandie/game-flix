@@ -1,6 +1,8 @@
 import { GameDetailsResponse, GameInfo, GameResponse } from "./gamesTypes";
 
-//This function will take the response that we got from the first endpoint, use the id to get the details of the game then return only the needed properties.
+/*This function will take the response that we got from the first endpoint (The 'dirty data' as I'm calling it.), 
+then it's using the game id to get the details of the game then return only the needed properties.
+*/
 export async function fetchGameById(
   gamesRes: GameResponse[]
 ): Promise<GameInfo[]> {
@@ -33,7 +35,7 @@ export async function fetchGameById(
         // Here I am using the index to keep the data ordered, using a for loop will be slower so I opted for this solution.
         games[index] = gameInfo;
       } else {
-        console.warn("game already exists, skipping...");
+        console.warn("game already exists, skipping it...");
       }
     } catch (err) {
       console.error(err);

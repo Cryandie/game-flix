@@ -13,21 +13,33 @@ function GamesFetch() {
   async function fetchGames() {
     /* This api returns a maximum of 40 games, so we are calling it many times to get the required number of games. This will return 120 games,
     I'm fixing a limit in fetchGameById.ts */
-    for (let page = 1; page <= 3; page++) {
-      const url = `${baseUrl}&page_size=40&page=${page}`;
-      try {
-        const res = await fetch(url);
-        const data = await res.json();
-        const result: GameResponse[] = data.results;
-        fetchedGames.push(...result);
-      } catch (err: any) {
-        //TODO: Handle errors
-        setError(err.message);
+
+    /* Since our requests are limited with this API, I will be cache-ing the data. We can check for changes and update it once in a while 
+    but it won't be needed in this project and it makes more sense to request the data once and cache it, it's also better for UX. */
+    const cachedData = localStorage.getItem("gamesData");
+    if (cachedData) {
+      // If the data is in localStorage, parse it and use it
+      const gameInfo: GameInfo[] = JSON.parse(cachedData);
+      setGames(gameInfo);
+    } else {
+      for (let page = 1; page <= 3; page++) {
+        const url = `${baseUrl}&page_size=40&page=${page}`;
+        try {
+          const res = await fetch(url);
+          const data = await res.json();
+          const result: GameResponse[] = data.results;
+          fetchedGames.push(...result);
+        } catch (err: any) {
+          //TODO: Handle errors
+          setError(err.message);
+        }
       }
+      // Please note that fetchGameById is also cleaning the data and returning only the data we need.
+      const gameInfo: GameInfo[] = await fetchGameById(fetchedGames);
+      setGames(gameInfo);
+      // Store the data in localStorage
+      localStorage.setItem("gamesData", JSON.stringify(gameInfo));
     }
-    // Please note that fetchGameById is also cleaning the data and returning only the data we need.
-    const gameInfo: GameInfo[] = await fetchGameById(fetchedGames);
-    setGames(gameInfo);
   }
 
   useEffect(() => {
