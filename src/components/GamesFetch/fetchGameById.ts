@@ -8,29 +8,33 @@ export async function fetchGameById(
   const promises = gamesRes.map(async (game, index) => {
     try {
       const res = await fetch(
-        `https://api.rawg.io/api/games/${game.id}?key=${process.env.REACT_APP_API_KEY}
-        `,
-        { method: "GET" }
+        `https://api.rawg.io/api/games/${game.id}?key=${process.env.REACT_APP_API_KEY}`
       );
       const data = (await res.json()) as GameDetailsResponse;
-      //Since our API is returning a long description we are only taking a part of it:
-      const summary =
-        data.description
-          .replace(/<[^>]*>/g, "")
-          .split(".")
-          .slice(0, 2)
-          .join(".") + ".";
-      const gameInfo: GameInfo = {
-        id: game.id,
-        cover: game.background_image,
-        name: game.name,
-        released: game.released,
-        summary,
-        // The maximum score for this API is 5 and it is a decimal. We are rounding it up and multiplying it by 2 to match the screenshots in the exercise.
-        score: Math.ceil(game.rating) * 2,
-      };
-      // Here I am using the index to keep the data ordered, using a for loop will be slower so I opted for this solution.
-      games[index] = gameInfo;
+      // I noticed that the api could return duplicants, so I am checking if the game already exists + making sure that we are getting 100 games, not more.
+      if (!games.some((game) => game.id === data.id) && index <= 99) {
+        //Since our API is returning a long description we are only taking a part of it:
+        const summary =
+          data.description
+            .replace(/<[^>]*>/g, "")
+            .split(".")
+            .slice(0, 2)
+            .join(".") + ".";
+        const gameInfo: GameInfo = {
+          id: game.id,
+          cover: game.background_image,
+          name: game.name,
+          released: game.released,
+          summary,
+          // The maximum score for this API is 5 and it is a decimal. We are rounding it up and multiplying it by 2 to match the screenshots in the exercise.
+          score: Math.ceil(game.rating) * 2,
+          index: index,
+        };
+        // Here I am using the index to keep the data ordered, using a for loop will be slower so I opted for this solution.
+        games[index] = gameInfo;
+      } else {
+        console.warn("game already exists, skipping...");
+      }
     } catch (err) {
       console.error(err);
     }

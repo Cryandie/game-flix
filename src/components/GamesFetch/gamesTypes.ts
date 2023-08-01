@@ -42,4 +42,5 @@ export interface GameInfo {
   released: string;
   summary: string;
   score: number;
+  index: number;
 }
