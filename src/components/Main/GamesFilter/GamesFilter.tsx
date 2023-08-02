@@ -56,8 +56,9 @@ function GamesFilter({
             min="1"
             max="10"
             onChange={(e) => {
-              const value = Number(e.target.value);
-              if (value >= 1 && value <= 10) {
+              // const value = Number(e.target.value);
+              const value = e.target.value;
+              if (value === "" || (Number(value) >= 1 && Number(value) <= 10)) {
                 setMinScoreFilter(value);
               }
             }}
