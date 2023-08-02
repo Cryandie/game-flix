@@ -9,7 +9,7 @@
 
 - Since I couldn't find the API link to use for this project, I used the [RAWG API](https://rawg.io/apidocs).
 - The screenshots in the project instructions seem to use a dummy API, so using RAWG makes the app more realistic as it contains real data about games.
-- The RAWG API has a monthly limit on the number of requests, so I used the browser cache to store data and avoid making requests every time the page is reloaded. This is why the first time the page loads it takes longer, but subsequent loads should only take about 2 seconds!
+- The RAWG API has a monthly limit on the number of requests, so I used the browser cache to store data and avoid making requests every time the page is reloaded. This is why the first time the page loads it takes longer, but subsequent loads should only take about 2 seconds! Also this is better for UX.(Less mobile data consumed 😉)
 - I only used one external module, Material UI for icons (We are not counting react-router-dom right? 🤣).
 - In the order section, I organized the data in ascending order to match the arrow icon.
 - Since I'm not very familiar with React, I'm not sure if this is the best way to organize the project structure. I'm open to feedback! (This applies to more than just the project structure 😳)
