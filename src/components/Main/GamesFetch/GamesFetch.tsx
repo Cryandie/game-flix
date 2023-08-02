@@ -82,10 +82,10 @@ function GamesFetch({ nameFilter, minScoreFilter, order }: GamesFetchProps) {
       {error && <p className="error-msg">{error}</p>}
       {isLoading && (
         <p className="loading-text">
-          😵Loading Games... It may take a few seconds to load the games if you
+          🥱Loading Games... It may take a few seconds to load the games if you
           are visiting this page for the first time, please note that this is
-          intended because the data is being stored in the cache (The API has a
-          maximum requests limit) 😵
+          intended because the data is being stored in the cache. (The API has a
+          maximum requests limit)😴
         </p>
       )}
       {!isLoading &&
