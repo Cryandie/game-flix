@@ -5,7 +5,7 @@ import { useState } from "react";
 
 function Main() {
   const [nameFilter, setNameFilter] = useState("");
-  const [minScoreFilter, setMinScoreFilter] = useState(1);
+  const [minScoreFilter, setMinScoreFilter] = useState<string | number>("");
   const [order, setOrder] = useState("score");
 
   return (

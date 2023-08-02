@@ -6,8 +6,8 @@ import CustomDropdown from "../../utility/custom-dropdown/CustomDropdown";
 interface GamesFilterProps {
   nameFilter: string;
   setNameFilter: (value: string) => void;
-  minScoreFilter: number;
-  setMinScoreFilter: (value: number) => void;
+  minScoreFilter: string | number;
+  setMinScoreFilter: (value: string | number) => void;
   order: string;
   setOrder: (value: string) => void;
 }
@@ -28,6 +28,11 @@ function GamesFilter({
   const handleDropdownChange = (value: string) => {
     setOrder(value);
   };
+  const handleClear = () => {
+    setNameFilter("");
+    setMinScoreFilter("");
+    setOrder("score");
+  };
   return (
     <div className="filter-card">
       <h1 className="filter-card-title">Filter Results</h1>
@@ -39,6 +44,7 @@ function GamesFilter({
             type="text"
             placeholder="Text string"
             onChange={(e) => setNameFilter(e.target.value)}
+            value={nameFilter}
           />
         </div>
         <div className="card-item">
@@ -49,7 +55,13 @@ function GamesFilter({
             placeholder="1 - 10"
             min="1"
             max="10"
-            onChange={(e) => setMinScoreFilter(Number(e.target.value))}
+            onChange={(e) => {
+              const value = Number(e.target.value);
+              if (value >= 1 && value <= 10) {
+                setMinScoreFilter(value);
+              }
+            }}
+            value={minScoreFilter}
           />
         </div>
       </section>
@@ -65,7 +77,9 @@ function GamesFilter({
             />
           </section>
           <section className="filter-button-container">
-            <button className="filter-button"> Clear </button>
+            <button className="filter-button" onClick={handleClear}>
+              Clear
+            </button>
           </section>
         </div>
       </section>

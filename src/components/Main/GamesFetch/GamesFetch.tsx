@@ -6,7 +6,7 @@ import { fetchGameById } from "./fetchGameById";
 //Not creating a types file since we have only one interface here
 interface GamesFetchProps {
   nameFilter: string;
-  minScoreFilter: number;
+  minScoreFilter: string | number;
   order: string;
 }
 function GamesFetch({ nameFilter, minScoreFilter, order }: GamesFetchProps) {
@@ -93,7 +93,7 @@ function GamesFetch({ nameFilter, minScoreFilter, order }: GamesFetchProps) {
           .filter((game) =>
             game.name.toLowerCase().includes(nameFilter.toLowerCase())
           )
-          .filter((game) => game.score >= minScoreFilter)
+          .filter((game) => game.score >= Number(minScoreFilter))
           .map((game: GameInfo) => (
             <div className="games-list-card" key={game.id}>
               {!isMobile && (

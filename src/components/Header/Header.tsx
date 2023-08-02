@@ -1,4 +1,4 @@
-import { NavLink, Route, Routes } from "react-router-dom";
+import { NavLink, Route, Routes, Navigate } from "react-router-dom";
 import "./Header.css";
 import Contact from "../Main/Contact";
 
@@ -27,6 +27,7 @@ function Header() {
       </nav>
 
       <Routes>
+        <Route path="/" element={<Navigate to="/video-games" />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </div>
