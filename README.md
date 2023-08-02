@@ -1,48 +1,30 @@
-# Project details doc will be added very soon 😉
+# Hello Hellooo! 😀
 
-# Getting Started with Create React App
+## Please note that this is my first React app!
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- I learned React back in 2020 when I started coding and worked on a small side project, but I haven't used React since then.
+- I have experience with Angular and Vue, which helped me create this project even without extensive knowledge of React. This means that there is always room for improvement, which is true for programming in general. 😁
 
-## Available Scripts
+## Good to know:
 
-In the project directory, you can run:
+- Since I couldn't find the API link to use for this project, I used the [RAWG API](https://rawg.io/apidocs).
+- The screenshots in the project instructions seem to use a dummy API, so using RAWG makes the app more realistic as it contains real data about games.
+- The RAWG API has a monthly limit on the number of requests, so I used the browser cache to store data and avoid making requests every time the page is reloaded. This is why the first time the page loads it takes longer, but subsequent loads should only take about 2 seconds!
+- I only used one external module, Material UI for icons (We are not counting react-router-dom right? 🤣).
+- In the order section, I organized the data in ascending order to match the arrow icon.
+- Since I'm not very familiar with React, I'm not sure if this is the best way to organize the project structure. I'm open to feedback! (This applies to more than just the project structure 😳)
 
-### `npm start`
+## Project Structure:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- The app (in the root `index.tsx` file) contains:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+  - The header
+  - The main content (which includes the Contact and Games components)
+  - The footer
 
-### `npm test`
+- The `components` folder contains four subfolders for each component:
+  - The `Header` (`header.tsx` and `header.css`) is a navbar that contains our `NavLink` and route components. The `Contact` component is called from here.
+  - The `Main` component contains the main content (yes, really! 😆). We have the filtering logic for games in `GamesFilter`, and the fetching logic in `GamesFetch`. Both of these are used in `Main/index.tsx`.
+  - The `utility` folder only contains a custom dropdown component for sorting data.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Thank you for your time! 😊

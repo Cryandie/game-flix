@@ -121,7 +121,7 @@ function GamesFetch({ nameFilter, minScoreFilter, order }: GamesFetchProps) {
               {isMobile && (
                 <section className="game-text-container-sm">
                   <div className="game-score-container-sm">
-                    <div className="game-score-sm">{game.score}</div>
+                    <p className="game-score-sm">{game.score}</p>
                   </div>
                   <h1 className="game-card-title">{game.name}</h1>
                   <h3 className="game-date">{game.released}</h3>
@@ -130,7 +130,7 @@ function GamesFetch({ nameFilter, minScoreFilter, order }: GamesFetchProps) {
               )}
               {!isMobile && (
                 <section className="game-score-container">
-                  <div className="game-score"> {game.score} </div>
+                  <p className="game-score"> {game.score} </p>
                 </section>
               )}
             </div>

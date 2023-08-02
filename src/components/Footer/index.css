@@ -11,3 +11,9 @@
   margin-bottom: 30px;
   padding: 10px;
 }
+
+.footer-link {
+  text-decoration: none;
+  margin-left: 10px;
+  color: #5692e8;
+}
