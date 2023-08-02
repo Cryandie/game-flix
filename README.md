@@ -13,6 +13,7 @@
 - I only used one external module, Material UI for icons (We are not counting react-router-dom right? 🤣).
 - In the order section, I organized the data in ascending order to match the arrow icon.
 - Since I'm not very familiar with React, I'm not sure if this is the best way to organize the project structure. I'm open to feedback! (This applies to more than just the project structure 😳)
+- If you are using a smartphone, Chrome is recommended for guaranteed responsiveness.
 
 ## Project Structure:
 
