@@ -13,7 +13,6 @@ function App() {
     <>
       <Header />
       {location.pathname !== "/contact" && <Main />}
-      {console.log(location.pathname)}
       <Footer />
     </>
   );

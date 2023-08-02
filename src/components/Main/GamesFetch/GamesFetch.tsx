@@ -16,6 +16,7 @@ function GamesFetch({ nameFilter, minScoreFilter, order }: GamesFetchProps) {
   const fetchedGames: GameResponse[] = [];
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const sortedGames = [...games].sort((a, b) => {
     if (order === "release") {
       return new Date(a.released).getTime() - new Date(b.released).getTime();
@@ -33,11 +34,13 @@ function GamesFetch({ nameFilter, minScoreFilter, order }: GamesFetchProps) {
 
     /* Since our requests are limited with this API, I will be cache-ing the data. We can check for changes and update it once in a while 
     but it won't be needed in this project so it makes more sense to request the data once and cache it, it's also better for UX. */
+    setIsLoading(true);
     const cachedData = localStorage.getItem("gamesData");
     if (cachedData) {
       // If the data is in localStorage, parse it and use it
       const gameInfo: GameInfo[] = JSON.parse(cachedData);
       setGames(gameInfo);
+      setIsLoading(false);
     } else {
       for (let page = 1; page <= 3; page++) {
         const url = `${baseUrl}&page_size=40&page=${page}`;
@@ -47,7 +50,6 @@ function GamesFetch({ nameFilter, minScoreFilter, order }: GamesFetchProps) {
           const result: GameResponse[] = data.results;
           fetchedGames.push(...result);
         } catch (err: any) {
-          //TODO: Handle errors
           setError(err.message);
         }
       }
@@ -56,6 +58,7 @@ function GamesFetch({ nameFilter, minScoreFilter, order }: GamesFetchProps) {
       setGames(gameInfo);
       // Store the data in localStorage
       localStorage.setItem("gamesData", JSON.stringify(gameInfo));
+      setIsLoading(false);
     }
   }
 
@@ -75,54 +78,63 @@ function GamesFetch({ nameFilter, minScoreFilter, order }: GamesFetchProps) {
 
   return (
     <div>
-      {/* TODO:handle err style */}
-      {error && <p>{error}</p>}
-      {sortedGames
-        .filter((game) =>
-          game.name.toLowerCase().includes(nameFilter.toLowerCase())
-        )
-        .filter((game) => game.score >= minScoreFilter)
-        .map((game: GameInfo) => (
-          <div className="games-list-card" key={game.id}>
-            {!isMobile && (
-              <section className="game-img-container">
-                <img className="game-img" src={game.cover} alt="game cover" />
-              </section>
-            )}
-            {isMobile && (
-              <section className="game-img-container">
-                <img
-                  className="game-img-sm"
-                  style={{ backgroundImage: `url(${game.cover})` }}
-                  src={game.cover}
-                  alt="game cover"
-                />
-              </section>
-            )}
-            {!isMobile && (
-              <section className="game-text-container">
-                <h1 className="game-card-title">{game.name}</h1>
-                <h3 className="game-date">{game.released}</h3>
-                <p className="game-summary">{game.summary}</p>
-              </section>
-            )}
-            {isMobile && (
-              <section className="game-text-container-sm">
-                <div className="game-score-container-sm">
-                  <div className="game-score-sm">{game.score}</div>
-                </div>
-                <h1 className="game-card-title">{game.name}</h1>
-                <h3 className="game-date">{game.released}</h3>
-                <p className="game-summary">{game.summary}</p>
-              </section>
-            )}
-            {!isMobile && (
-              <section className="game-score-container">
-                <div className="game-score"> {game.score} </div>
-              </section>
-            )}
-          </div>
-        ))}
+      {/* I am not creating a re-usable loading or error component since we only need it here  */}
+      {error && <p className="error-msg">{error}</p>}
+      {isLoading && (
+        <p className="loading-text">
+          😵Loading Games... It may take some time to load the data if you are
+          visiting this page for the first time, please note that this is
+          intended because the data is being stored in the cache (because the
+          API has a maximum requests limit) 😵
+        </p>
+      )}
+      {!isLoading &&
+        sortedGames
+          .filter((game) =>
+            game.name.toLowerCase().includes(nameFilter.toLowerCase())
+          )
+          .filter((game) => game.score >= minScoreFilter)
+          .map((game: GameInfo) => (
+            <div className="games-list-card" key={game.id}>
+              {!isMobile && (
+                <section className="game-img-container">
+                  <img className="game-img" src={game.cover} alt="game cover" />
+                </section>
+              )}
+              {isMobile && (
+                <section className="game-img-container">
+                  <img
+                    className="game-img-sm"
+                    style={{ backgroundImage: `url(${game.cover})` }}
+                    src={game.cover}
+                    alt="game cover"
+                  />
+                </section>
+              )}
+              {!isMobile && (
+                <section className="game-text-container">
+                  <h1 className="game-card-title">{game.name}</h1>
+                  <h3 className="game-date">{game.released}</h3>
+                  <p className="game-summary">{game.summary}</p>
+                </section>
+              )}
+              {isMobile && (
+                <section className="game-text-container-sm">
+                  <div className="game-score-container-sm">
+                    <div className="game-score-sm">{game.score}</div>
+                  </div>
+                  <h1 className="game-card-title">{game.name}</h1>
+                  <h3 className="game-date">{game.released}</h3>
+                  <p className="game-summary">{game.summary}</p>
+                </section>
+              )}
+              {!isMobile && (
+                <section className="game-score-container">
+                  <div className="game-score"> {game.score} </div>
+                </section>
+              )}
+            </div>
+          ))}
     </div>
   );
 }
