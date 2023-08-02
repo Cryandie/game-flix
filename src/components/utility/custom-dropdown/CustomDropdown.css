@@ -1,0 +1,32 @@
+.custom-dropdown {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  background-color: #182c47;
+  display: flex;
+  justify-content: space-between;
+}
+
+.selected-value {
+  padding: 3px;
+}
+
+.options-list {
+  background-color: #182c47;
+  opacity: 0.9;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.option {
+  padding: 8px;
+}
+
+.option:hover {
+  background-color: #5692e8;
+}

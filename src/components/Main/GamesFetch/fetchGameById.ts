@@ -30,7 +30,6 @@ export async function fetchGameById(
           summary,
           // The maximum score for this API is 5 and it is a decimal. We are rounding it up and multiplying it by 2 to match the screenshots in the exercise.
           score: Math.ceil(game.rating) * 2,
-          index: index,
         };
         // Here I am using the index to keep the data ordered, using a for loop will be slower so I opted for this solution.
         games[index] = gameInfo;

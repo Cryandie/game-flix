@@ -1,0 +1,39 @@
+.main-container {
+  display: flex;
+  margin: 50px;
+}
+
+.games-filter,
+.games-fetch {
+  padding: 20px;
+}
+
+/* This part targets the classes from the gamesFetch and gamesFilter components */
+.filter-card,
+.games-list-card {
+  background-color: #0e1a2b;
+  color: #fff;
+}
+
+.filter-card-title {
+  padding-left: 20px;
+  padding-top: 20px;
+}
+
+.filter-card-title,
+.card-item {
+  padding-bottom: 20px;
+}
+
+/* media queries to handle different screen sizes  */
+@media (width < 940px) {
+  .main-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+@media (width < 700px) {
+  .main-container {
+    margin: 10px;
+  }
+}

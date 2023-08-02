@@ -3,19 +3,36 @@ import "./GamesFetch.css";
 import { GameInfo, GameResponse } from "./gamesTypes";
 import { fetchGameById } from "./fetchGameById";
 
-function GamesFetch() {
+//Not creating a types file since we have only one interface here
+interface GamesFetchProps {
+  nameFilter: string;
+  minScoreFilter: number;
+  order: string;
+}
+function GamesFetch({ nameFilter, minScoreFilter, order }: GamesFetchProps) {
   const baseUrl = `https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}&dates=2019-09-01,2023-08-01&platforms=18,1,7`;
   const [games, setGames] = useState<GameInfo[]>([]);
   // fetchedGames are 'dirty', they contain unnecessary data and need to be cleaned. => games contain only the data we need.
   const fetchedGames: GameResponse[] = [];
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const sortedGames = [...games].sort((a, b) => {
+    if (order === "release") {
+      return new Date(a.released).getTime() - new Date(b.released).getTime();
+    } else if (order === "score") {
+      return a.score - b.score;
+    } else if (order === "name") {
+      return a.name.localeCompare(b.name);
+    } else {
+      return 0;
+    }
+  });
   async function fetchGames() {
     /* This api returns a maximum of 40 games, so we are calling it many times to get the required number of games. This will return 120 games,
     I'm fixing a limit in fetchGameById.ts */
 
     /* Since our requests are limited with this API, I will be cache-ing the data. We can check for changes and update it once in a while 
-    but it won't be needed in this project and it makes more sense to request the data once and cache it, it's also better for UX. */
+    but it won't be needed in this project so it makes more sense to request the data once and cache it, it's also better for UX. */
     const cachedData = localStorage.getItem("gamesData");
     if (cachedData) {
       // If the data is in localStorage, parse it and use it
@@ -60,48 +77,52 @@ function GamesFetch() {
     <div>
       {/* TODO:handle err style */}
       {error && <p>{error}</p>}
-      {games.map((game: GameInfo) => (
-        <div className="games-list-card" key={game.id}>
-          <div>Index: {game.index}</div>
-          {!isMobile && (
-            <section className="game-img-container">
-              <img className="game-img" src={game.cover} alt="game cover" />
-            </section>
-          )}
-          {isMobile && (
-            <section className="game-img-container">
-              <img
-                className="game-img-sm"
-                style={{ backgroundImage: `url(${game.cover})` }}
-                src={game.cover}
-                alt="game cover"
-              />
-            </section>
-          )}
-          {!isMobile && (
-            <section className="game-text-container">
-              <h1 className="game-card-title">{game.name}</h1>
-              <h3 className="game-date">{game.released}</h3>
-              <p className="game-summary">{game.summary}</p>
-            </section>
-          )}
-          {isMobile && (
-            <section className="game-text-container-sm">
-              <div className="game-score-container-sm">
-                <div className="game-score-sm">{game.score}</div>
-              </div>
-              <h1 className="game-card-title">{game.name}</h1>
-              <h3 className="game-date">{game.released}</h3>
-              <p className="game-summary">{game.summary}</p>
-            </section>
-          )}
-          {!isMobile && (
-            <section className="game-score-container">
-              <div className="game-score"> {game.score} </div>
-            </section>
-          )}
-        </div>
-      ))}
+      {sortedGames
+        .filter((game) =>
+          game.name.toLowerCase().includes(nameFilter.toLowerCase())
+        )
+        .filter((game) => game.score >= minScoreFilter)
+        .map((game: GameInfo) => (
+          <div className="games-list-card" key={game.id}>
+            {!isMobile && (
+              <section className="game-img-container">
+                <img className="game-img" src={game.cover} alt="game cover" />
+              </section>
+            )}
+            {isMobile && (
+              <section className="game-img-container">
+                <img
+                  className="game-img-sm"
+                  style={{ backgroundImage: `url(${game.cover})` }}
+                  src={game.cover}
+                  alt="game cover"
+                />
+              </section>
+            )}
+            {!isMobile && (
+              <section className="game-text-container">
+                <h1 className="game-card-title">{game.name}</h1>
+                <h3 className="game-date">{game.released}</h3>
+                <p className="game-summary">{game.summary}</p>
+              </section>
+            )}
+            {isMobile && (
+              <section className="game-text-container-sm">
+                <div className="game-score-container-sm">
+                  <div className="game-score-sm">{game.score}</div>
+                </div>
+                <h1 className="game-card-title">{game.name}</h1>
+                <h3 className="game-date">{game.released}</h3>
+                <p className="game-summary">{game.summary}</p>
+              </section>
+            )}
+            {!isMobile && (
+              <section className="game-score-container">
+                <div className="game-score"> {game.score} </div>
+              </section>
+            )}
+          </div>
+        ))}
     </div>
   );
 }

@@ -2,21 +2,46 @@
 
 .header-container {
   display: flex;
-  margin-left: 10%;
+  margin-left: 7%;
 }
 
-.contact {
+.nav-item {
+  display: inline-block;
+  width: 100%;
+  text-transform: none;
+  text-decoration: none;
+  position: relative;
+  top: 50px;
+  z-index: 2;
+  margin-right: 50px;
+}
+.active-link,
+.active-link:before {
+  display: block;
   margin: 0;
-  font-family: "Montserrat", sans-serif;
-  font-size: 35px;
-  padding-left: 5%;
-  padding-top: 90px;
+  padding: 0;
+}
+.active-link,
+.active-link:before,
+.reflection {
+  position: relative;
 }
 
-.logo {
-  align-self: flex-start;
-  height: 80px;
-  padding-top: 60px;
+.active-link {
+  text-decoration: none;
+}
+
+.reflection {
+  display: none;
+}
+
+.active-link .reflection {
+  display: block;
+  top: -20px;
+  right: 25px;
+  color: #0e1a2b;
+  font-size: 40px;
+  font-family: "Montserrat", sans-serif;
 }
 
 /* media queries to handle different screen sizes  */
@@ -25,20 +50,23 @@
     display: flex;
     flex-direction: column;
   }
-  .contact {
-    align-self: baseline;
-    padding-top: 20px;
-    padding-left: 45px;
+  .nav-item {
+    padding-left: 25px;
+    width: 200px;
   }
-  .logo {
-    align-self: baseline;
+  .inactive-link {
+    display: block;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    top: 50px;
+  }
+  .active-link .reflection {
+    right: 2px;
   }
 }
 
 @media (width < 340px) {
-  .logo {
-    width: 250px;
-  }
   .contact {
     padding-left: 36px;
   }
