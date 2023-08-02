@@ -10,6 +10,8 @@
   margin-top: 50px;
   margin-bottom: 30px;
   padding: 10px;
+  inline-size: 200px;
+  overflow-wrap: break-word;
 }
 
 .footer-link {

@@ -131,6 +131,6 @@
     display: flex;
     justify-content: center;
     box-shadow: 0 0 10px #5692e8;
-    transform: translateY(-120%);
+    transform: translateY(-100%);
   }
 }
