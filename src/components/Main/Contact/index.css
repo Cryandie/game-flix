@@ -61,7 +61,7 @@ form h2 {
   height: 80px;
 }
 
-.contact-button {
+.contact-btn {
   background-color: #5692e8;
   width: 60px;
   height: 25px;
@@ -92,6 +92,10 @@ form h2 {
   .contact-input,
   #message {
     width: max-content;
+  }
+  .contact-btn-container,
+  .contact-btn {
+    width: 100%;
   }
 }
 

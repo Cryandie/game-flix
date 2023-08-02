@@ -46,7 +46,7 @@ function Contact() {
             </div>
           </section>
           <section className="contact-btn-container">
-            <button type="submit" className="contact-button">
+            <button type="submit" className="contact-btn">
               Submit
             </button>
           </section>
