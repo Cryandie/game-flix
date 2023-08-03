@@ -13,8 +13,8 @@ export async function fetchGameById(
         `https://api.rawg.io/api/games/${game.id}?key=${process.env.REACT_APP_API_KEY}`
       );
       const data = (await res.json()) as GameDetailsResponse;
-      // I noticed that the api could return duplicants, so I am checking if the game already exists + making sure that we are getting 100 games, not more.
-      if (!games.some((game) => game.id === data.id) && index <= 99) {
+      // I noticed that the api could return duplicants, so I am checking if the game already exists.
+      if (!games.some((game) => game.id === data.id)) {
         //Since our API is returning a long description we are only taking a part of it:
         const summary =
           data.description
