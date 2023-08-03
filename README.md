@@ -11,7 +11,7 @@
 - The screenshots in the project instructions seem to use a dummy API, so using RAWG makes the app more realistic as it contains real data about games.
 - I only used one external module, Material UI for icons (We are not counting react-router-dom right? 🤣).
 - In the order section, I organized the data in ascending order to match the arrow icon.
-- Each page contains 20 games, using the next button will display the 20 next games from the API.
+- Each page contains 20 games, using the next button will display the 20 next games from the API. PLease note that we have much more than 100 games in total.
 - Since I'm not very familiar with React, I'm not sure if this is the best way to organize the project structure. I'm open to feedback! (This applies to more than just the project structure 😳). This also concerns the folders & files 'casing', I am currently using PascalCase for React Components, and camelCase otherwise.
 - If you are using a smartphone, Chrome is recommended for guaranteed responsiveness.
 
