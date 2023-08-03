@@ -9,10 +9,10 @@
 
 - Since I couldn't find the API link to use for this project, I used the [RAWG API](https://rawg.io/apidocs).
 - The screenshots in the project instructions seem to use a dummy API, so using RAWG makes the app more realistic as it contains real data about games.
-- The RAWG API has a monthly limit on the number of requests, so I used the browser cache to store data and avoid making requests every time the page is reloaded. This is why the first time the page loads it takes longer, but subsequent loads should only take about 2 seconds! Also this is better for UX.(Less mobile data consumed 😉)
 - I only used one external module, Material UI for icons (We are not counting react-router-dom right? 🤣).
 - In the order section, I organized the data in ascending order to match the arrow icon.
-- Since I'm not very familiar with React, I'm not sure if this is the best way to organize the project structure. I'm open to feedback! (This applies to more than just the project structure 😳)
+- Each page contains 20 games, using the next button will display the 20 next games from the API.
+- Since I'm not very familiar with React, I'm not sure if this is the best way to organize the project structure. I'm open to feedback! (This applies to more than just the project structure 😳). This also concerns the folders & files 'casing', I am currently using PascalCase for React Components, and camelCase otherwise.
 - If you are using a smartphone, Chrome is recommended for guaranteed responsiveness.
 
 ## Project Structure:
@@ -25,7 +25,7 @@
 
 - The `components` folder contains four subfolders for each component:
   - The `Header` (`header.tsx` and `header.css`) is a navbar that contains our `NavLink` and route components. The `Contact` component is called from here.
-  - The `Main` component contains the main content (yes, really! 😆). We have the filtering logic for games in `GamesFilter`, and the fetching logic in `GamesFetch`. Both of these are used in `Main/index.tsx`.
-  - The `utility` folder only contains a custom dropdown component for sorting data.
+  - The `Main` component contains the main content (yes, really! 😆). We have the filter logic for games in `GamesFilter`, and the fetch + sort + search logic in `GamesFetch`. Both of these are used in `Main/index.tsx`.
+  - The `utility` folder contains a custom dropdown component for sorting data by order and UseDebounce that prevents the API from being called on every keystroke and reduce the number of requests sent to the server (Used in the NameFilter: Search).
 
 ### Thank you for your time! 😊

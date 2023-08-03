@@ -1,8 +1,16 @@
-import { NavLink, Route, Routes, Navigate } from "react-router-dom";
+import {
+  NavLink,
+  Route,
+  Routes,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import "./Header.css";
 import Contact from "../Main/Contact";
+import Main from "../Main";
 
 function Header() {
+  const location = useLocation();
   return (
     <div>
       <nav className="header-container">
@@ -28,6 +36,10 @@ function Header() {
 
       <Routes>
         <Route path="/" element={<Navigate to="/video-games" />} />
+        <Route
+          path="/video-games"
+          element={location.pathname !== "/contact" && <Main />}
+        />
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </div>

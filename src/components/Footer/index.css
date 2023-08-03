@@ -7,7 +7,6 @@
   border: 1px solid #fff;
   width: max-content;
   margin: auto;
-  margin-top: 50px;
   margin-bottom: 30px;
   padding: 10px;
   inline-size: 200px;
@@ -18,4 +17,11 @@
   text-decoration: none;
   margin-left: 10px;
   color: #5692e8;
+}
+
+/* This is needed to vertically-align the footer with the pagination btns */
+@media (width >= 940px) {
+  .footer-container {
+    margin-left: 51%;
+  }
 }
