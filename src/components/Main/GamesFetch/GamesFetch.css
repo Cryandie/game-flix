@@ -66,6 +66,12 @@
 }
 
 /* media queries to handle different screen sizes  */
+@media (width >= 2100px) {
+  .game-img-container {
+    margin: 0;
+  }
+}
+
 @media (width < 1100px) {
   .game-img-container {
     height: 220px;
